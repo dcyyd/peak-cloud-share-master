@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peak Cloud Share - 安全高效的文件共享平台，支持多格式文件共享">
+    <meta name="keywords" content="文件共享, 文件传输">
+    <meta name="author" content="D.C.Y.">
+    <link rel="icon" href="assets/img/favicon.ico">
+    <title>峰云共享</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+</head>
+
+<body class="bg-gray-900 min-h-screen flex flex-col items-center">
+<!-- 设置内容最大宽度并居中 -->
+<!-- 添加2xl断点优化 -->
+<div class="max-w-[1728px] w-full px-5">
+    <header class="sticky top-0 z-50 flex items-center justify-between px-8 py-4 bg-gray-900/95 backdrop-blur-md header">
+        <!-- 品牌Logo -->
+        <a href="/" class="flex items-center space-x-2 group">
+                <span class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                    Peak
+                </span>
+            <div class="flex items-center space-x-1">
+                <svg class="w-8 h-8 text-blue-400 transition-transform group-hover:rotate-12" fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                </svg>
+                <span class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                        Share
+                    </span>
+            </div>
+        </a>
+
+        <!-- 右侧功能区 -->
+        <div class="flex items-center space-x-6">
+            <!-- 主题切换 -->
+            <button onclick="toggleTheme()"
+                    class="p-3 rounded-lg hover:bg-gray-700 transition-colors text-gray-300 hover:text-white">
+                <i class="fas fa-moon text-base w-6"></i>
+            </button>
+
+            <!-- 语言切换 -->
+            <button onclick="toggleLanguage()"
+                    class="px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors text-gray-300 hover:text-white
+                               flex items-center space-x-2">
+                <i class="fas fa-globe text-base"></i>
+                <span class="text-base font-medium">EN/中文</span>
+            </button>
+
+            <!-- 分隔线 -->
+            <div class="h-8 w-px bg-gray-600 mx-4"></div>
+
+            <!-- 退出按钮 -->
+            <a href="/logout"
+               class="px-4 py-3 rounded-lg bg-red-600 hover:bg-red-700 transition-colors text-white
+                          flex items-center space-x-2">
+                <i class="fas fa-sign-out-alt text-base"></i>
+                <span class="text-base font-medium">Logout</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- 文件列表区域 -->
+    <main class="file-list px-8 py-6">
+        <!-- 上传文件标题 -->
+        <h2 data-lang-key="uploadedFiles" class="text-2xl font-bold text-white mb-4">📂 File List</h2>
+        <!-- 文件表格 -->
+        <table class="file-table" id="file-table">
+            <thead>
+            <!-- 文件表格头部 -->
+            <tr class="file-header">
+                <!-- 优化列宽分配 -->
+                <th class="w-[45%]" data-lang-key="name">Name</th>  <!-- 名称列45% -->
+                <th class="w-[15%]" data-lang-key="size">Size</th>  <!-- 尺寸15% -->
+                <th class="w-[20%]" data-lang-key="uploadTime">Upload Time</th>
+                <th class="w-[20%]" data-lang-key="lastModified">Last Modified</th>
+            </tr>
+            </thead>
+            <tbody id="file-table-body">
+            <!-- 遍历文件列表 -->
+            {% for file in files %}
+                <tr class="file-item">
+                    <td>
+                        <!-- 文件下载链接 -->
+                        <a href="/download/{{ file.name }}" class="file-name text-blue-400 hover:underline">
+                            <strong>{{ file.name.replace('_', ' ') }}</strong>
+                        </a>
+                    </td>
+                    <td class="file-size">
+                        {{ file.size }}
+                    </td>
+                    <td class="upload-time">
+                        {{ file.upload_time }}
+                    </td>
+                    <td class="modified-time">
+                        {{ file.modified_time }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- 分页区域 -->
+        <div class="pagination" id="pagination">
+            <!-- 上一页 -->
+            {% if pagination.current > 1 %}
+                <a href="#" onclick="changePage(event, {{ pagination.current - 1 }})" class="page-item">
+                    Previous
+                </a>
+            {% endif %}
+
+            <!-- 页码 -->
+            {% for p in pagination.range %}
+                {% if p == '...' %}
+                    <span class="page-item ellipsis">⋯</span>
+                {% else %}
+                    <a href="#" onclick="changePage(event, {{ p }})"
+                       class="page-item {% if p == pagination.current %}active{% endif %}">
+                        {{ p }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+            <!-- 下一页 -->
+            {% if pagination.current < pagination.total %}
+                <a href="#" onclick="changePage(event, {{ pagination.current + 1 }})" class="page-item">
+                    Next
+                </a>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="px-8 py-4 text-center text-gray-500">
+        <p data-lang-key="copyright"></p>
+    </footer>
+</div>
+<!-- 引入外部脚本 -->
+<script src="assets/js/scripts.js"></script>
+</body>
+
+</html>

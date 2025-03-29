@@ -1,0 +1,545 @@
+/**
+ * @file styles.css
+ * @description 峰云共享系统全局样式表
+ * @functionality
+ *    - 定义全局颜色变量和过渡效果
+ *    - 实现亮色/暗色主题切换样式
+ *    - 文件列表和分页导航样式
+ *    - 响应式布局适配多种设备
+ * @author D.C.Y <https://dcyyd.github.io>
+ * @version 1.2.0
+ * @license MIT
+ * @copyright © 2025 D.C.Y. All rights reserved.
+ */
+
+/**
+ * 全局变量定义
+ */
+:root {
+    --primary: #2c3e50;
+    --gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    --light-gray: #ecf0f1;
+    --dark-gray: #111827;
+    --white: #ffffff;
+    --black: #000000;
+    --text-light: #333333; /* 调整亮色主题文本颜色 */
+    --text-dark: #ffffff;
+    --transition-time: 0.3s; /* 定义过渡时间 */
+}
+
+/**
+ * 全局 body 样式
+ * 设置页面的最大宽度，使其在页面中居中显示，同时添加内边距以增强页面的可读性。
+ * 定义字体、背景颜色和文本颜色，并添加背景颜色过渡效果，使主题切换更加平滑自然。
+ */
+body {
+    transition: background-color var(--transition-time), color var(--transition-time);
+}
+
+/* 头部样式 */
+.header {
+    /* 添加阴影效果，增强层次感 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-time);
+    border-radius: 8px; /* 添加圆角 */
+    margin-top: 10px; /* 添加顶部外边距 */
+}
+
+/* 文件列表表格样式 */
+.file-table {
+    width: 100%;
+    /* 合并表格边框 */
+    border-collapse: collapse;
+    margin-top: 2rem;
+    transition: background-color var(--transition-time);
+    border-radius: 8px; /* 添加圆角 */
+    overflow: hidden; /* 隐藏溢出内容 */
+}
+
+/* 表格响应式优化 - 大屏幕 */
+@media (min-width: 1280px) {
+    .file-table th,
+    .file-table td {
+        /* 增大单元格内边距，提升表格在大屏幕上的视觉效果 */
+        padding: 1rem 1.5rem;
+    }
+}
+
+/* 表格表头和单元格通用样式 */
+.file-table th,
+.file-table td {
+    padding: 1rem;
+    text-align: left;
+    /* 添加底部边框 */
+    border-bottom: 1px solid #4a5568;
+    transition: background-color var(--transition-time), color var(--transition-time), border-color var(--transition-time);
+}
+
+/* 表格表头样式 */
+.file-table th {
+    background-color: #2d3748;
+    color: #a0aec0;
+}
+
+/* 表格行悬停样式 */
+.file-table tr:hover {
+    background-color: #1a202c;
+    transition: background-color var(--transition-time);
+}
+
+/* 分页导航样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    transition: background-color var(--transition-time), color var(--transition-time);
+    border-radius: 8px; /* 添加圆角 */
+    overflow: hidden; /* 隐藏溢出内容 */
+}
+
+/* 分页导航按钮样式 */
+.page-item {
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 0.25rem;
+    background-color: #2d3748;
+    color: #a0aec0;
+    text-decoration: none;
+    /* 添加背景颜色过渡效果 */
+    transition: background-color var(--transition-time), color var(--transition-time);
+}
+
+/* 分页导航按钮悬停样式 */
+.page-item:hover {
+    background-color: #4a5568;
+}
+
+/* 当前激活的分页导航按钮样式 */
+.page-item.active {
+    background-color: #4299e1;
+    color: white;
+}
+
+/* 分页导航中的省略号样式 */
+.ellipsis {
+    background-color: transparent;
+    color: #a0aec0;
+}
+
+/**
+ * 错误消息样式
+ * 以红色文本显示错误信息，底部添加一定外边距，文本居中显示，方便用户快速识别错误。
+ */
+.error-message {
+    color: red;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/**
+ * 亮色主题下 body 样式
+ * 应用亮色背景和深色文本，营造清新的视觉风格。
+ */
+body.light {
+    background: #f8f9fa;
+    color: #2c3e50; /* 调整为更深的灰色以提高可读性 */
+}
+
+/**
+ * 亮色主题下文件列表和分页导航样式
+ * 采用亮色背景和深色文本，与亮色主题保持一致。
+ */
+body.light .file-list,
+body.light .pagination {
+    background: #f8f9fa;
+    color: #2c3e50; /* 调整为更深的灰色以提高可读性 */
+}
+
+/**
+ * 亮色主题下文件列表表格表头样式
+ * 使用浅色背景，增强视觉效果。
+ */
+body.light .file-table th {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #2c3e50; /* 调整为更深的灰色以提高可读性 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/**
+ * 亮色主题下文件列表表格单元格样式
+ * 底部边框设置为浅灰色，与亮色主题相适配。
+ */
+body.light .file-table td {
+    border-bottom: 1px solid #dee2e6;
+}
+
+/**
+ * 亮色主题下文件列表表格行悬停样式
+ * 鼠标悬停时，行背景变为浅灰色，提供交互反馈。
+ */
+body.light .file-table tr:hover {
+    background: #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/**
+ * 亮色主题下分页导航按钮样式
+ * 文本颜色设置为深色，与亮色背景形成对比。
+ */
+body.light .pagination .page-item {
+    color: #2c3e50; /* 调整为更深的灰色以提高可读性 */
+    background-color: #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/**
+ * 亮色主题下分页导航按钮悬停样式
+ * 鼠标悬停时，背景变为浅灰色，增强交互效果。
+ */
+body.light .pagination .page-item:hover {
+    background: #dee2e6;
+}
+
+/**
+ * 亮色主题下文件名称链接样式
+ * 文本颜色设置为深色，方便用户查看。
+ */
+body.light .file-name {
+    color: #2c3e50; /* 调整为更深的灰色以提高可读性 */
+    text-decoration: none; /* 禁用原始下划线 */
+    position: relative; /* 为伪元素定位 */
+}
+
+/**
+ * 亮色主题下文件名称链接悬停效果
+ * 显示从左到右的动画下划线
+ */
+body.light .file-name:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #2c3e50; /* 与文本颜色一致 */
+    transition: width var(--transition-time);
+    width: 100%;
+}
+
+body.light .file-name::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #2c3e50; /* 与文本颜色一致 */
+    transition: width var(--transition-time);
+}
+
+/**
+ * 深色主题下 body 样式
+ * 应用深色背景和白色文本，营造不同的视觉风格。
+ */
+body.dark {
+    background: var(--dark-gray);
+    color: var(--text-dark);
+}
+
+/**
+ * 深色主题下文件列表和分页导航样式
+ * 采用深色背景和白色文本，与深色主题保持一致。
+ */
+body.dark .file-list,
+body.dark .pagination {
+    background: var(--dark-gray);
+    color: var(--text-dark);
+}
+
+/**
+ * 深色主题下文件列表表格表头样式
+ * 使用渐变背景，增强视觉效果。
+ */
+body.dark .file-table th {
+    background: var(--gradient);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/**
+ * 深色主题下文件列表表格单元格样式
+ * 底部边框设置为深灰色，与深色主题相适配。
+ */
+body.dark .file-table td {
+    border-bottom: 1px solid #444;
+}
+
+/**
+ * 深色主题下文件列表表格行悬停样式
+ * 鼠标悬停时，行背景变为深灰色，提供交互反馈。
+ */
+body.dark .file-table tr:hover {
+    background: #444;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/**
+ * 深色主题下分页导航按钮样式
+ * 文本颜色设置为白色，与深色背景形成对比。
+ */
+body.dark .pagination .page-item {
+    color: var(--text-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/**
+ * 深色主题下分页导航按钮悬停样式
+ * 鼠标悬停时，背景变为深灰色，增强交互效果。
+ */
+body.dark .pagination .page-item:hover {
+    background: #444;
+}
+
+/**
+ * 深色主题下文件名称链接样式
+ * 文本颜色设置为白色，方便用户查看。
+ */
+body.dark .file-name {
+    color: var(--text-dark);
+    text-decoration: none; /* 禁用原始下划线 */
+    position: relative; /* 为伪元素定位 */
+}
+
+/**
+ * 深色主题下文件名称链接悬停效果
+ * 显示从左到右的动画下划线
+ */
+body.dark .file-name:hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--text-dark); /* 与文本颜色一致 */
+    transition: width var(--transition-time);
+    width: 100%;
+}
+
+body.dark .file-name::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--text-dark); /* 与文本颜色一致 */
+    transition: width var(--transition-time);
+}
+
+/**
+ * 语言切换和主题切换按钮通用样式
+ * 采用白色背景，添加圆角、内边距和鼠标指针样式，提升用户交互体验。
+ * 去除边框，添加背景颜色过渡效果，使按钮交互更加平滑。
+ */
+.language-switch,
+.theme-switch {
+    background: var(--light-gray);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background var(--transition-time);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/**
+ * 语言切换和主题切换按钮悬停样式
+ * 鼠标悬停时，背景变为深灰色，提供交互反馈。
+ */
+.language-switch:hover,
+.theme-switch:hover {
+    background: #bdc3c7;
+}
+
+/**
+ * 语言切换按钮样式
+ * 绝对定位在页面左上角，方便用户操作。
+ */
+.language-switch {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/**
+ * 主题切换按钮样式
+ * 绝对定位在页面右上角，方便用户操作。
+ */
+.theme-switch {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/**
+ * 页脚样式
+ * 文本居中显示，顶部添加一定外边距，使用灰色文本。
+ * 添加文本颜色过渡效果，使主题切换更加平滑。
+ */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: #7f8c8d;
+    transition: color var(--transition-time);
+}
+
+/**
+ * 页脚链接样式
+ * 去除下划线，继承文本颜色，保持页脚简洁美观。
+ */
+footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/**
+ * 亮色主题下页脚样式
+ * 文本颜色变为深灰色，与亮色主题相协调。
+ */
+body.light footer {
+    color: #4a5568;
+}
+
+/**
+ * 深色主题下页脚样式
+ * 文本颜色变为浅灰色，与深色主题相协调。
+ */
+body.dark footer {
+    color: #34495e;
+}
+
+/**
+ * 响应式设计 - 小屏幕
+ * 当屏幕宽度小于 768px 时，调整页面布局和字体大小，确保在小屏幕设备上的可读性。
+ */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .file-header {
+        font-size: 1rem;
+    }
+
+    .file-table th,
+    .file-table td {
+        padding: 0.5rem;
+    }
+
+    .pagination .page-item {
+        padding: 0.3rem 0.8rem;
+    }
+}
+
+/**
+ * 响应式设计 - 小屏幕手机
+ * 当屏幕宽度小于 480px 时，进一步调整页面布局和字体大小，适配小屏幕手机。
+ */
+@media (max-width: 480px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .file-header {
+        font-size: 0.9rem;
+    }
+
+    .file-table th,
+    .file-table td {
+        padding: 0.3rem;
+    }
+
+    .pagination {
+        padding: 0.5rem;
+    }
+
+    .pagination .page-item {
+        padding: 0.2rem 0.6rem;
+    }
+
+    .logout-button,
+    .language-switch,
+    .theme-switch {
+        padding: 0.3rem 0.8rem;
+    }
+
+    .login-form {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}
+
+/**
+ * 响应式设计 - 平板设备
+ * 当屏幕宽度在 769px 至 1024px 之间时，调整页面布局和字体大小，适配平板设备。
+ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .file-header {
+        font-size: 1.1rem;
+    }
+
+    .file-table th,
+    .file-table td {
+        padding: 0.6rem;
+    }
+
+    .pagination .page-item {
+        padding: 0.4rem 0.9rem;
+    }
+}
+
+/* 优化亮色主题下header按钮样式 */
+body.light .theme-switch,
+body.light .language-switch {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    border: 1px solid #dee2e6;
+}
+
+body.light .theme-switch:hover,
+body.light .language-switch:hover {
+    background-color: #e9ecef;
+    border-color: #c5c5c5;
+}
+
+/* 优化亮色主题下上传文件标题样式 */
+body.light h2[data-lang-key="uploadedFiles"] {
+    color: #2c3e50;
+}
+
+/* 优化文件表格头部渐变背景 */
+body.light .file-table th {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
