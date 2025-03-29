@@ -1,6 +1,3 @@
-以下是优化结构并添加图标后的项目文档，使用Unicode图标增强专业性：
-
-
 <div style="text-align: center;">
     <h1>Peak Cloud Share - 安全高效的文件共享平台</h1>
     <p>
