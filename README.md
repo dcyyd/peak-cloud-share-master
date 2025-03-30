@@ -1,4 +1,4 @@
-<div style="text-align: center;">
+<div align="center">
     <h1>Peak Cloud Share - 安全高效的文件共享平台</h1>
     <p>
         <img src="https://img.shields.io/badge/Flask-3.1.0-44b883?logo=flask&logoColor=white">
