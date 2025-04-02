@@ -7,11 +7,43 @@
     <meta name="description" content="Peak Cloud Share - 安全高效的文件共享平台，支持多格式文件共享">
     <meta name="keywords" content="文件共享, 文件传输">
     <meta name="author" content="D.C.Y.">
-    <link rel="icon" href="assets/img/favicon.ico">
+    <link rel="icon" href="./assets/img/favicon.ico">
     <title>峰云共享</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/tailwind.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">
+    <!-- 引入 Animate.css 库 -->
+    <link rel="stylesheet" href="./assets/css/animate.min.css">
+    <style>
+        /* 原有样式保留 */
+        .page-item:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        button:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+
+        /* 可增强加载动画（若有需要） */
+        .animate__fadeIn {
+            animation-name: fadeIn;
+            animation-duration: 0.6s;
+            animation-timing-function: ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-gray-900 min-h-screen flex flex-col items-center">
@@ -67,16 +99,14 @@
 
     <!-- 文件列表区域 -->
     <main class="file-list px-8 py-6">
-        <!-- 上传文件标题 -->
-        <h2 data-lang-key="uploadedFiles" class="text-2xl font-bold text-white mb-4">📂 File List</h2>
         <!-- 文件表格 -->
         <table class="file-table" id="file-table">
             <thead>
             <!-- 文件表格头部 -->
             <tr class="file-header">
                 <!-- 优化列宽分配 -->
-                <th class="w-[45%]" data-lang-key="name">Name</th>  <!-- 名称列45% -->
-                <th class="w-[15%]" data-lang-key="size">Size</th>  <!-- 尺寸15% -->
+                <th class="w-[45%]" data-lang-key="name">Name</th> <!-- 名称列45% -->
+                <th class="w-[15%]" data-lang-key="size">Size</th> <!-- 尺寸15% -->
                 <th class="w-[20%]" data-lang-key="uploadTime">Upload Time</th>
                 <th class="w-[20%]" data-lang-key="lastModified">Last Modified</th>
             </tr>
@@ -84,7 +114,8 @@
             <tbody id="file-table-body">
             <!-- 遍历文件列表 -->
             {% for file in files %}
-                <tr class="file-item">
+                <tr class="file-item animate__animated animate__fadeIn"
+                    style="animation-delay: {{ loop.index * 0.1 }}s">
                     <td>
                         <!-- 文件下载链接 -->
                         <a href="/download/{{ file.name }}" class="file-name text-blue-400 hover:underline">
@@ -141,7 +172,6 @@
     </footer>
 </div>
 <!-- 引入外部脚本 -->
-<script src="assets/js/scripts.js"></script>
+<script src="./assets/js/scripts.js"></script>
 </body>
-
 </html>

@@ -1,6 +1,6 @@
 """
 @file path_manager.py
-@description 路径管理模块，负责动态获取项目路径
+@description 峰云共享系统路径管理模块，负责动态获取项目路径
 @functionality
     - 动态获取项目根目录
     - 支持打包后的路径解析

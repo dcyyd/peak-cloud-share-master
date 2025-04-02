@@ -1,6 +1,6 @@
 """
 @file auth.py
-@description 用户认证模块，用于管理用户登录和账户锁定。
+@description 峰云共享系统用户认证模块，用于管理用户登录和账户锁定。
 @functionality
 - 用户文件的初始化与校验
 - 用户登录验证

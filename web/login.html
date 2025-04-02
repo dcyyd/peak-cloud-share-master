@@ -5,14 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#111827">
     <title>LOGIN | 峰云共享</title>
-    <link rel="icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="assets/css/tailwind.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <script src="assets/js/scripts.js"></script>
+    <link rel="icon" href="./assets/img/favicon.ico">
+    <link rel="stylesheet" href="./assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">
+    <script src="./assets/js/scripts.js"></script>
+    <style>
+        /* 自定义动画 */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 调整输入框文本颜色 */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #f3f4f6; /* 浅灰色 */
+            -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset; /* 深灰色背景 */
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-slide-in {
+            animation: slide-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+            animation-delay: 0.2s;
+        }
+
+        /* 输入框过渡优化 */
+        .group:hover .group-hover\:border-blue-500\/30 {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+    </style>
 </head>
 
 <body class="bg-[#111827] min-h-screen font-[IBM-Plex-Sans]" style="background-color: #111827;">
-<header class="relative z-10 flex items-center justify-between px-8 py-6">
+<header class="relative z-10 flex items-center justify-between px-8 py-6 animate-fade-in">
     <div class="flex items-center space-x-3">
         <!-- 企业Logo容器 -->
         <a href="/" class="flex items-center space-x-2">
@@ -31,12 +77,12 @@
         <div class="h-6 w-px bg-gray-600"></div>
         <a href="/support" class="text-gray-300 hover:text-white transition-colors flex items-center"
            style="font-weight: bold">
-            <i class="fas fa-life-ring mr-2 text-sm"></i>技术支持
+            <i class="fas fa-tools mr-2 text-sm"></i>技术支持
         </a>
     </nav>
 </header>
 
-<main class="relative z-10 flex items-center justify-center py-12 px-4">
+<main class="relative z-10 flex items-center justify-center py-12 px-4 animate-slide-in">
     <div class="w-full max-w-md bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-2xl shadow-2xl backdrop-blur-xl border border-gray-700/30 transform transition-all hover:shadow-blue-500/10">
         <div class="p-8 space-y-6">
             <!-- 头部标识 -->
@@ -102,7 +148,7 @@
     </div>
 </main>
 
-<footer class="relative z-10 text-center py-6 text-gray-400">
+<footer class="relative z-10 text-center py-6 text-gray-400 animate-fade-in">
     <div class="max-w-4xl mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-6">
             <p class="text-sm tracking-wide">© 2025 <a href="https://dcyyd.github.io" target="_blank"
@@ -112,7 +158,7 @@
     </div>
 </footer>
 
-<script src="assets/js/particles.min.js"></script>
+<script src="./assets/js/particles.min.js"></script>
 <script>
     // 显式调用安全防护功能
     setupSecurity();
@@ -131,35 +177,5 @@
         }
     }
 </script>
-<style>
-    /* 自定义动画 */
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-            transform: translateY(-5px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* 调整输入框文本颜色 */
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus {
-        -webkit-text-fill-color: #f3f4f6; /* 浅灰色 */
-        -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset; /* 深灰色背景 */
-    }
-
-    .animate-fade-in {
-        animation: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* 输入框过渡优化 */
-    .group:hover .group-hover\:border-blue-500\/30 {
-        border-color: rgba(99, 102, 241, 0.3);
-    }
-</style>
 </body>
 </html>

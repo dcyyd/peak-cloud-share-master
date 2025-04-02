@@ -58,13 +58,13 @@ def setup_logging():
 
     # 文件日志格式
     file_formatter = logging.Formatter(
-        '[%(asctime)s] [%(levelname)s] || %(message)s',
+        '[%(asctime)s] [%(levelname)s] %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
 
     # 控制台日志格式
     console_formatter = logging.Formatter(
-        '[%(asctime)s] [%(levelname)s] || %(message)s',
+        '[%(asctime)s] [%(levelname)s] %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
 
@@ -345,47 +345,23 @@ def setup_routes(app):
     # ======================
     # 错误处理路由
     # ======================
+    # 统一处理404错误
+    @app.errorhandler(404)
+    def page_not_found(error):
+        logger.error(f"404错误: {error}")
+        return render_template('error.html', code=404, message='请求的页面不存在'), 404
+
+    # 统一处理403错误
     @app.errorhandler(403)
     def forbidden(error):
-        """
-        403错误处理
-        功能: 处理权限不足错误
-        参数:
-            error: 错误对象
-        返回: 403错误页面
-        """
-        start_time = time.time()
-        logger.warning(f"403错误: {request.url}，用户被禁止访问",
-                       status_code=403, response_time=int((time.time() - start_time) * 1000))
-        return render_template('403.html'), 403
+        logger.error(f"403错误: {error}")
+        return render_template('error.html', code=403, message='禁止访问该页面'), 403
 
-    @app.errorhandler(404)
-    def not_found(error):
-        """
-        404错误处理
-        功能: 处理页面不存在错误
-        参数:
-            error: 错误对象
-        返回: 404错误页面
-        """
-        start_time = time.time()
-        logger.warning(f"404错误: {request.url}，页面未找到",
-                       status_code=404, response_time=int((time.time() - start_time) * 1000))
-        return render_template('404.html'), 404
-
+    # 统一处理500错误
     @app.errorhandler(500)
-    def internal_server_error(error):
-        """
-        500错误处理
-        功能: 处理服务器内部错误
-        参数:
-            error: 错误对象
-        返回: 500错误页面
-        """
-        start_time = time.time()
-        logger.error(f"500错误: {request.url}, 错误信息: {str(error)}，服务器内部错误",
-                     status_code=500, response_time=int((time.time() - start_time) * 1000), exc_info=True)
-        return render_template('500.html'), 500
+    def internal_error(error):
+        logger.error(f"500错误: {error}", exc_info=True)
+        return render_template('error.html', code=500, message='服务器内部错误'), 500
 
 
 # 设置路由

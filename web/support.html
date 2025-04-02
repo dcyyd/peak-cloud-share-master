@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#111827">
     <title>技术支持 | 峰云共享</title>
-    <link rel="icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/tailwind.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <script src="assets/js/scripts.js"></script>
+    <link rel="icon" href="./assets/img/favicon.ico">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">
+    <script src="./assets/js/scripts.js"></script>
     <style>
-        @keyframes fade-in {
+        /* 平滑进入动画 */
+        @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(-8px);
+                transform: translateY(-20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .animate-card {
-            animation: fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
         .font-[IBM-Plex-Sans] {
@@ -48,7 +61,7 @@
 </head>
 
 <body class="bg-[#111827] min-h-screen font-[IBM-Plex-Sans]" style="background-color: #111827;">
-<header class="relative z-10 flex items-center justify-between px-8 py-6">
+<header class="relative z-10 flex items-center justify-between px-8 py-6 animate-fade-in">
     <div class="flex items-center space-x-3">
         <!-- 企业Logo容器 -->
         <a href="/" class="flex items-center space-x-2">
@@ -74,7 +87,7 @@
 </header>
 
 <!-- 主体内容 -->
-<main class="container mx-auto px-6 py-10">
+<main class="container mx-auto px-6 py-10 animate-slide-in">
     <!-- 修改背景颜色为 #111827 -->
     <div class="max-w-3xl mx-auto bg-[#111827] rounded-3xl shadow-2xl border border-gray-light overflow-hidden">
         <!-- 标题区 -->
@@ -95,17 +108,17 @@
                     <h2 class="text-xl font-semibold text-white">项目信息</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="p-5 bg-gray-card rounded-xl">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.1s;">
                         <p class="font-medium text-gray-100"><b>开发维护团队</b></p>
                         <a class="text-sm text-gray-400 mb-2" href="Https://dcyyd.github.io"
                            target="_blank">峰云小组</a>
                     </div>
-                    <div class="p-5 bg-gray-card rounded-xl">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.2s;">
                         <p class="font-medium text-gray-100"><b>项目地址</b></p>
                         <a class="text-sm text-gray-400 mb-2"
                            href="https://github.com/dcyyd/peak-cloud-share-master.git" target="_blank">peak-cloud-share-master</a>
                     </div>
-                    <div class="p-5 bg-gray-card rounded-xl">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.3s;">
                         <p class="font-medium text-gray-100"><b>开源协议</b></p>
                         <a class="text-sm text-gray-400 mb-2" href="https://opensource.org/licenses/MIT"
                            target="_blank">MIT</a>
@@ -120,11 +133,11 @@
                     <h2 class="text-xl font-semibold text-white">联系渠道</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="p-5 bg-gray-card rounded-xl">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.4s;">
                         <p class="font-medium text-gray-100"><b>电子邮箱</b></p>
                         <a class="text-sm text-gray-400 mb-2" href="mailto:dcyyd_kcug@yeah.net">dcyyd_kcug@yeah.net</a>
                     </div>
-                    <div class="p-5 bg-gray-card rounded-xl">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.5s;">
                         <p class="font-medium text-gray-100"><b>联系电话</b></p>
                         <a class="text-sm text-gray-400 mb-2" href="tel:17633963626">+86 17633963626</a>
                     </div>
@@ -138,13 +151,13 @@
                     <h2 class="text-xl font-semibold text-white">服务时间</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="p-5 bg-gray-card rounded-xl">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.6s;">
                         <p class="font-medium text-gray-100"><b>常规支持</b></p>
                         <div class="space-y-1">
                             <p class="text-sm text-gray-400 mb-2">周一至周五 9:00-18:00</p>
                         </div>
                     </div>
-                    <div class="p-5 bg-gray-card rounded-xl">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.7s;">
                         <p class="font-medium text-gray-100"><b>非工作日支持</b></p>
                         <div class="space-y-1">
                             <p class="text-sm text-gray-400 mb-2">非工作日 10:00-16:00</p>
@@ -157,7 +170,7 @@
 </main>
 
 <!-- 页脚 -->
-<footer>
+<footer class="animate-fade-in" style="animation-delay: 0.8s">
     <div>
         <p class="text-sm text-gray-400">
             © 2025
@@ -170,7 +183,7 @@
         </p>
     </div>
 </footer>
-<script src="assets/js/particles.min.js"></script>
+<script src="./assets/js/particles.min.js"></script>
 <script>
     // 显式调用安全防护功能
     setupSecurity();
