@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111827">
+    <meta name="robots" content="noindex">
+    <title>技术支持 | 峰云共享</title>
+    <link rel="icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <style>
+        /* 平滑进入动画 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .font-[IBM-Plex-Sans] {
+            font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        /* 自定义样式 */
+        .bg-gradient-header {
+            background: linear-gradient(to right, rgba(37, 99, 235, 0.2), rgba(59, 130, 246, 0.2));
+        }
+
+        .bg-gray-card {
+            background-color: rgba(55, 65, 81, 0.3);
+        }
+
+        .border-gray-light {
+            border-color: rgba(75, 85, 99, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-[#111827] min-h-screen font-[IBM-Plex-Sans]" style="background-color: #111827;">
+<header class="relative z-10 flex items-center justify-between px-8 py-6 animate-fade-in">
+    <div class="flex items-center space-x-3">
+        <!-- 企业Logo容器 -->
+        <a href="/" class="flex items-center space-x-2">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+            <span class="text-xl font-bold text-gray-800" style="color: #ffffff;">Peak Cloud Share</span>
+        </a>
+    </div>
+    <nav class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="text-gray-300 hover:text-white transition-colors flex items-center"
+           style="font-weight: bold">
+            <i class="fas fa-home mr-2 text-sm"></i>首页
+        </a>
+        <div class="h-6 w-px bg-gray-600"></div>
+        <a href="https://github.com/dcyyd/peak-cloud-share-master.git"
+           class="text-gray-300 hover:text-white transition-colors flex items-center"
+           style="font-weight: bold" target="_blank">
+            <i class="fab fa-github mr-2 text-sm"></i>GitHub
+        </a>
+    </nav>
+</header>
+
+<!-- 主体内容 -->
+<main class="container mx-auto px-6 py-10 animate-slide-in">
+    <!-- 修改背景颜色为 #111827 -->
+    <div class="max-w-3xl mx-auto bg-[#111827] rounded-3xl shadow-2xl border border-gray-light overflow-hidden">
+        <!-- 标题区 -->
+        <div class="p-8 text-center bg-gradient-header border-b border-gray-light">
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-600 rounded-xl mb-3 shadow-lg">
+                <i class="fas fa-headset text-xl text-white"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-100 mb-1">技术支持中心</h1>
+            <p class="text-sm text-blue-300 font-medium">提供专业技术服务支持</p>
+        </div>
+
+        <!-- 内容区块 -->
+        <div class="p-8 space-y-8">
+            <!-- 项目信息 -->
+            <div class="space-y-5">
+                <div class="flex items-center space-x-2 text-blue-400">
+                    <i class="fas fa-info-circle"></i>
+                    <h2 class="text-xl font-semibold text-white">项目信息</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.1s;">
+                        <p class="font-medium text-gray-100"><b>开发维护团队</b></p>
+                        <a class="text-sm text-gray-400 mb-2" href="Https://dcyyd.github.io"
+                           target="_blank">峰云小组</a>
+                    </div>
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.2s;">
+                        <p class="font-medium text-gray-100"><b>项目地址</b></p>
+                        <a class="text-sm text-gray-400 mb-2"
+                           href="https://github.com/dcyyd/peak-cloud-share-master.git" target="_blank">peak-cloud-share-master</a>
+                    </div>
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.3s;">
+                        <p class="font-medium text-gray-100"><b>开源协议</b></p>
+                        <a class="text-sm text-gray-400 mb-2" href="https://opensource.org/licenses/MIT"
+                           target="_blank">MIT</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 联系方式 -->
+            <div class="space-y-5">
+                <div class="flex items-center space-x-2 text-blue-400">
+                    <i class="fas fa-phone-volume"></i>
+                    <h2 class="text-xl font-semibold text-white">联系渠道</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.4s;">
+                        <p class="font-medium text-gray-100"><b>电子邮箱</b></p>
+                        <a class="text-sm text-gray-400 mb-2" href="mailto:dcyyd_kcug@yeah.net">dcyyd_kcug@yeah.net</a>
+                    </div>
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.5s;">
+                        <p class="font-medium text-gray-100"><b>联系电话</b></p>
+                        <a class="text-sm text-gray-400 mb-2" href="tel:17633963626">+86 17633963626</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 服务时间 -->
+            <div class="space-y-5">
+                <div class="flex items-center space-x-2 text-blue-400">
+                    <i class="fas fa-clock"></i>
+                    <h2 class="text-xl font-semibold text-white">服务时间</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.6s;">
+                        <p class="font-medium text-gray-100"><b>常规支持</b></p>
+                        <div class="space-y-1">
+                            <p class="text-sm text-gray-400 mb-2">周一至周五 9:00-18:00</p>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-gray-card rounded-xl animate-fade-in" style="animation-delay: 0.7s;">
+                        <p class="font-medium text-gray-100"><b>非工作日支持</b></p>
+                        <div class="space-y-1">
+                            <p class="text-sm text-gray-400 mb-2">非工作日 10:00-16:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 页脚 -->
+<footer class="animate-fade-in" style="animation-delay: 0.8s">
+    <div>
+        <p class="text-sm text-gray-400">
+            &copy; <span id="current-year"></span>-<span id="next-current-year"></span>
+            <a href="https://dcyyd.github.io" target="_blank"
+               class="text-blue-400 hover:text-blue-300 transition-colors">
+                D.C.Y.
+            </a>
+            <span class="mx-2">|</span>v2.0.0
+            <span class="mx-2">|</span>峰云内部系统
+        </p>
+    </div>
+</footer>
+<script src="assets/js/scripts.js"></script>
+<script src="assets/js/particles.min.js"></script>
+<script>
+    // 显式调用安全防护功能
+    setupSecurity();
+</script>
+</body>
+</html>

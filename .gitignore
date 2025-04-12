@@ -1,0 +1,48 @@
+# IDE配置
+peak-cloud-share-master/.idea/
+.vscode/
+
+# 编译生成文件
+*.class
+*.jar
+*.war
+*.ear
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# 系统文件
+Thumbs.db
+.DS_Store
+
+# 构建目录
+build/
+dist/
+target/
+
+# 二进制文件
+*.so
+*.dll
+*.exe
+*.obj
+*.o
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.tmp.*
+*.lock
+*.lock.*
+cache/
+*.cache
+
+# 备份文件
+backup/
+*.bak
+
+# 本地开发环境文件
+.env
+*.local

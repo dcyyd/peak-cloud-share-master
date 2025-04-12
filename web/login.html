@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111827">
+    <meta name="robots" content="noindex">
+    <title>LOGIN | 峰云共享</title>
+    <link rel="icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <style>
+        /* 自定义动画 */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 调整输入框文本颜色 */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #f3f4f6; /* 浅灰色 */
+            -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset; /* 深灰色背景 */
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-slide-in {
+            animation: slide-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+            animation-delay: 0.2s;
+        }
+
+        /* 输入框过渡优化 */
+        .group:hover .group-hover\:border-blue-500\/30 {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* 表单切换动画 */
+        .form-container {
+            transition: transform 0.3s ease;
+        }
+
+        .form-container.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        /* 验证码按钮样式 */
+        .code-btn {
+            width: 150px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .code-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .code-btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body class="bg-[#111827] min-h-screen font-[IBM-Plex-Sans]" style="background-color: #111827;">
+<header class="relative z-10 flex items-center justify-between px-8 py-6 animate-fade-in">
+    <div class="flex items-center space-x-3">
+        <!-- 企业Logo容器 -->
+        <a href="/" class="flex items-center space-x-2">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+            <span class="text-xl font-bold text-gray-800" style="color: #ffffff;">Peak Cloud Share</span>
+        </a>
+    </div>
+    <nav class="hidden md:flex space-x-6 items-center">
+        <a href="/privacy" class="text-gray-300 hover:text-white transition-colors flex items-center"
+           style="font-weight: bold">
+            <i class="fas fa-shield-alt mr-2 text-sm"></i>隐私政策
+        </a>
+        <div class="h-6 w-px bg-gray-600"></div>
+        <a href="/support" class="text-gray-300 hover:text-white transition-colors flex items-center"
+           style="font-weight: bold">
+            <i class="fas fa-tools mr-2 text-sm"></i>技术支持
+        </a>
+    </nav>
+</header>
+
+<main class="relative z-10 flex items-center justify-center py-12 px-4 animate-slide-in">
+    <div class="w-full max-w-md bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-2xl shadow-2xl backdrop-blur-xl border border-gray-700/30 transform transition-all hover:shadow-blue-500/10">
+        <div class="p-8 space-y-6">
+            <!-- 头部标识 -->
+            <div class="text-center space-y-2">
+                <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl mb-4 shadow-lg">
+                    <i class="fas fa-fingerprint text-2xl text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white" id="formTitle">峰云共享系统 - 登录</h2>
+                <p class="text-gray-400 text-sm tracking-wide">ISO 27001 | SOC 2 Type II 认证</p>
+            </div>
+
+            <!-- 动态错误提示 -->
+            {% if error %}
+            <div class="p-3 bg-red-900/20 border border-red-700/30 rounded-lg flex items-center animate-fade-in"
+                 id="errorToast">
+                <i class="fas fa-exclamation-circle text-red-400 mr-3"></i>
+                <span class="text-red-300 text-sm tracking-wide">{{ error }}</span>
+                <button onclick="closeToast()" class="ml-auto text-red-400 hover:text-red-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            {% endif %}
+
+            <!-- 表单容器 -->
+            <div class="form-container" id="loginForm">
+                <!-- 登录表单 -->
+                <form class="space-y-6" method="post" action="/login">
+                    <!-- 用户名输入 -->
+                    <div class="form-group">
+                        <label class="text-sm font-medium text-gray-300 mb-2 flex items-center">
+                            <i class="fas fa-id-badge mr-2 text-blue-400"></i>企业身份
+                        </label>
+                        <div class="relative group">
+                            <input type="text" id="username" name="username" required
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600/30 rounded-xl text-gray-100 placeholder-gray-400/60 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-200"
+                                   placeholder="工号 / 企业邮箱">
+                            <div class="absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-envelope text-gray-400 hover:text-blue-400 transition-colors"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 密码输入 -->
+                    <div class="form-group">
+                        <label class="text-sm font-medium text-gray-300 mb-2 flex items-center">
+                            <i class="fas fa-lock mr-2 text-blue-400"></i>安全凭证
+                        </label>
+                        <div class="relative group">
+                            <input type="password" id="loginPassword" name="password" required
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600/30 rounded-xl text-gray-100 placeholder-gray-400/60 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-200"
+                                   placeholder="••••••••">
+                            <div class="absolute inset-y-0 right-3 flex items-center space-x-2">
+                                <button type="button" onclick="togglePasswordVisibility('loginPassword')"
+                                        class="text-gray-400 hover:text-blue-400 transition-colors">
+                                    <i class="fas fa-eye-slash text-sm" id="loginPasswordToggleIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 提交按钮 -->
+                    <button type="submit"
+                            class="w-full py-3.5 px-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-semibold text-white hover:from-blue-500 hover:to-blue-400 transition-all transform hover:scale-[1.02] shadow-xl hover:shadow-blue-500/20 flex items-center justify-center space-x-2">
+                        <i class="fas fa-unlock-alt"></i>
+                        <span>安全登录</span>
+                    </button>
+                </form>
+
+                <!-- 切换到注册表单 -->
+                <div class="text-center mt-6">
+                    <p class="text-gray-400 text-sm tracking-wide">
+                        还没有账号？<a href="#" class="text-blue-400 hover:text-blue-300 transition-colors"
+                                      id="showRegister">立即注册</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 注册表单 -->
+            <div class="form-container hidden" id="registerForm">
+                <form class="space-y-6" method="post" action="/register">
+                    <!-- 邮箱输入 -->
+                    <div class="form-group">
+                        <label class="text-sm font-medium text-gray-300 mb-2 flex items-center">
+                            <i class="fas fa-envelope mr-2 text-blue-400"></i>企业邮箱
+                        </label>
+                        <div class="relative group">
+                            <input type="email" id="email" name="email" required
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600/30 rounded-xl text-gray-100 placeholder-gray-400/60 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-200"
+                                   placeholder="请输入企业邮箱">
+                            <div class="absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-envelope text-gray-400 hover:text-blue-400 transition-colors"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 验证码输入 -->
+                    <div class="form-group">
+                        <label class="text-sm font-medium text-gray-300 mb-2 flex items-center">
+                            <i class="fas fa-shield-alt mr-2 text-blue-400"></i>验证码
+                        </label>
+                        <div class="flex gap-2">
+                            <input type="text" id="code" name="code" required
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600/30 rounded-xl text-gray-100 placeholder-gray-400/60 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-200"
+                                   placeholder="请输入6位数字验证码">
+                            <button type="button" onclick="sendCode()"
+                                    class="code-btn" id="codeBtn">获取验证码
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 密码输入 -->
+                    <div class="form-group">
+                        <label class="text-sm font-medium text-gray-300 mb-2 flex items-center">
+                            <i class="fas fa-lock mr-2 text-blue-400"></i>设置密码
+                        </label>
+                        <div class="relative group">
+                            <input type="password" id="regPassword" name="password" required
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600/30 rounded-xl text-gray-100 placeholder-gray-400/60 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-200"
+                                   placeholder="请设置密码">
+                            <div class="absolute inset-y-0 right-3 flex items-center space-x-2">
+                                <button type="button" onclick="togglePasswordVisibility('regPassword')"
+                                        class="text-gray-400 hover:text-blue-400 transition-colors">
+                                    <i class="fas fa-eye-slash text-sm" id="regPasswordToggleIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 确认密码输入 -->
+                    <div class="form-group">
+                        <label class="text-sm font-medium text-gray-300 mb-2 flex items-center">
+                            <i class="fas fa-lock mr-2 text-blue-400"></i>确认密码
+                        </label>
+                        <div class="relative group">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required
+                                   class="w-full px-4 py-3 bg-gray-800 border border-gray-600/30 rounded-xl text-gray-100 placeholder-gray-400/60 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-200"
+                                   placeholder="请再次输入密码">
+                            <div class="absolute inset-y-0 right-3 flex items-center space-x-2">
+                                <button type="button" onclick="togglePasswordVisibility('confirmPassword')"
+                                        class="text-gray-400 hover:text-blue-400 transition-colors">
+                                    <i class="fas fa-eye-slash text-sm" id="confirmPasswordToggleIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 提交按钮 -->
+                    <button type="submit"
+                            class="w-full py-3.5 px-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-semibold text-white hover:from-blue-500 hover:to-blue-400 transition-all transform hover:scale-[1.02] shadow-xl hover:shadow-blue-500/20 flex items-center justify-center space-x-2">
+                        <i class="fas fa-user-plus"></i>
+                        <span>立即注册</span>
+                    </button>
+                </form>
+
+                <!-- 切换到登录表单 -->
+                <div class="text-center mt-6">
+                    <p class="text-gray-400 text-sm tracking-wide">
+                        已有账号？<a href="#" class="text-blue-400 hover:text-blue-300 transition-colors" id="showLogin">立即登录</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="relative z-10 text-center py-6 text-gray-400 animate-fade-in">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-6">
+            <p class="text-sm tracking-wide">&copy; <span id="current-year"></span>-<span id="next-current-year"></span>
+                <a href="https://dcyyd.github.io" target="_blank"
+                   class="text-blue-400 hover:text-blue-300 transition-colors">D.C.Y.</a>&nbsp;&nbsp;|&nbsp;&nbsp;v2.0.0&nbsp;&nbsp;|&nbsp;&nbsp;峰云内部系统
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/scripts.js"></script>
+<script src="assets/js/particles.min.js"></script>
+</body>
+</html>

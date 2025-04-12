@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111827">
+    <meta name="robots" content="noindex">
+    <title>隐私政策 | 峰云共享</title>
+    <link rel="icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <style>
+        /* 平滑进入动画 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 调整输入框文本颜色 */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #f3f4f6; /* 浅灰色 */
+            -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset; /* 深灰色背景 */
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* 输入框过渡优化 */
+        .group:hover .group-hover\:border-blue-500\/30 {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-[#111827] min-h-screen font-[IBM-Plex-Sans]" style="background-color: #111827;">
+<header class="relative z-10 flex items-center justify-between px-8 py-6 animate-fade-in">
+    <div class="flex items-center space-x-3">
+        <!-- 企业Logo容器 -->
+        <a href="/" class="flex items-center space-x-2">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+            <span class="text-xl font-bold text-gray-800" style="color: #ffffff;">Peak Cloud Share</span>
+        </a>
+    </div>
+    <nav class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="text-gray-300 hover:text-white transition-colors flex items-center"
+           style="font-weight: bold">
+            <i class="fas fa-home mr-2 text-sm"></i>首页
+        </a>
+        <div class="h-6 w-px bg-gray-600"></div>
+        <a href="/support" class="text-gray-300 hover:text-white transition-colors flex items-center"
+           style="font-weight: bold">
+            <i class="fas fa-tools mr-2 text-sm"></i>技术支持
+        </a>
+    </nav>
+</header>
+
+<main class="relative z-10 flex items-center justify-center py-12 px-4 animate-slide-in">
+    <div class="w-full max-w-4xl bg-gradient-to-br from-gray-800/90 to-gray-900/90 rounded-2xl shadow-2xl backdrop-blur-xl border border-gray-700/30 transform transition-all hover:shadow-blue-500/10">
+        <div class="p-8 space-y-6">
+            <!-- 头部标识 -->
+            <div class="text-center space-y-2">
+                <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl mb-4 shadow-lg">
+                    <i class="fas fa-shield-alt text-2xl text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white">隐私政策</h2>
+                <p class="text-gray-400 text-sm tracking-wide">
+                    本隐私政策阐述了我们如何收集、使用、存储和保护您的个人信息</p>
+            </div>
+
+            <!-- 隐私政策具体内容 -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-white">1. 我们收集的信息</h3>
+                <p class="text-gray-400 text-sm tracking-wide">
+                    我们可能会收集您的姓名、联系方式（如电子邮件地址、电话号码）、企业身份信息（如工号、企业邮箱）等。这些信息用于身份验证、提供服务以及与您进行沟通。
+                </p>
+
+                <h3 class="text-xl font-bold text-white">2. 信息的使用</h3>
+                <p class="text-gray-400 text-sm tracking-wide">
+                    我们使用收集到的信息来提供和维护我们的服务，处理您的请求，以及进行安全验证。我们不会将您的个人信息用于未经您同意的其他目的。
+                </p>
+
+                <h3 class="text-xl font-bold text-white">3. 信息的存储和保护</h3>
+                <p class="text-gray-400 text-sm tracking-wide">
+                    我们会采取合理的安全措施来保护您的个人信息，防止未经授权的访问、使用或披露。您的信息将存储在安全的服务器上，并受到适当的保护措施。
+                </p>
+
+                <h3 class="text-xl font-bold text-white">4. 您的权利</h3>
+                <p class="text-gray-400 text-sm tracking-wide">
+                    您有权访问、更正、删除或限制我们对您个人信息的处理。如果您有任何关于隐私政策的问题或疑虑，请随时与我们联系。
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="relative z-10 text-center py-6 text-gray-400 animate-fade-in">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-6">
+            <p class="text-sm tracking-wide">&copy; <span id="current-year"></span>-<span id="next-current-year"></span> <a href="https://dcyyd.github.io" target="_blank"
+                                                       class="text-blue-400 hover:text-blue-300 transition-colors">D.C.Y.</a>&nbsp;&nbsp;|&nbsp;&nbsp;v2.0.0&nbsp;&nbsp;|&nbsp;&nbsp;峰云内部系统
+            </p>
+        </div>
+    </div>
+</footer>
+<script src="assets/js/scripts.js"></script>
+<script src="assets/js/particles.min.js"></script>
+<script>
+    // 显式调用安全防护功能
+    setupSecurity();
+</script>
+</body>
+</html>

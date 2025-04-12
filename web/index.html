@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peak Cloud Share - 安全高效的文件共享平台，支持多格式文件共享">
+    <meta name="keywords" content="文件共享, 文件传输">
+    <meta name="author" content="D.C.Y.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="assets/img/favicon.ico">
+    <title>峰云共享</title>
+    <!-- 预加载 CSS 文件 -->
+    <link rel="preload" as="style" href="assets/css/styles.css" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preload" as="style" href="assets/css/tailwind.min.css" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="preload" as="style" href="assets/css/all.min.css" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="preload" as="style" href="assets/css/animate.min.css" onload="this.rel='stylesheet'">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <!-- 预加载 JavaScript 文件 -->
+    <link rel="preload" as="script" href="assets/js/scripts.js">
+</head>
+
+<body class="bg-gray-900 min-h-screen flex flex-col items-center">
+<!-- 设置内容最大宽度并居中 -->
+<div class="max-w-[1728px] w-full px-5">
+    <header class="sticky top-0 z-50 flex items-center justify-between px-8 py-4 bg-gray-900/95 backdrop-blur-md header"
+            id="header">
+        <!-- 品牌Logo -->
+        <a href="/" class="flex items-center space-x-2 group">
+                <span class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                    Peak
+                </span>
+            <div class="flex items-center space-x-1">
+                <svg class="w-8 h-8 text-blue-400 transition-transform group-hover:rotate-12" fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                </svg>
+                <span class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                        Share
+                    </span>
+            </div>
+        </a>
+
+        <!-- 右侧功能区 -->
+        <div class="flex items-center space-x-6">
+            <!-- 主题切换 -->
+            <button onclick="toggleTheme()" class="theme-switch">
+                <i class="fas fa-moon text-base w-6"></i>
+                <span class="text-base font-medium">Dark/Light</span>
+            </button>
+
+            <!-- 语言切换 -->
+            <button onclick="toggleLanguage()" class="language-switch">
+                <i class="fas fa-globe text-base"></i>
+                <span class="text-base font-medium">EN/中文</span>
+            </button>
+
+            <a href="/logs"
+               class="px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-white flex items-center space-x-2">
+                <i class="fas fa-chart-bar text-base"></i>
+                <span class="text-base font-medium" data-lang-key="logAnalysis">日志分析</span>
+            </a>
+
+            <!-- 加粗的分隔线 -->
+            <div class="h-6 border-l border-gray-600 mx-4"></div>
+
+            <!-- 退出按钮 -->
+            <a href="/logout"
+               class="px-4 py-3 rounded-lg bg-red-600 hover:bg-red-700 transition-colors text-white flex items-center space-x-2 logout-button">
+                <i class="fas fa-sign-out-alt text-base"></i>
+                <span class="text-base font-medium" data-lang-key="logout">Logout</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="file-list px-8 py-6">
+        <!-- 文件上传表单 -->
+        <div class="upload-section mb-8 animate__animated animate__fadeIn">
+            <form id="upload-form" class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4"
+                  method="POST" enctype="multipart/form-data">
+                <!-- 文件上传 -->
+                <div class="relative group">
+                    <button type="button" onclick="document.getElementById('file-input').click()"
+                            class="custom-btn custom-upload-btn">
+                        <i class="fas fa-file-upload"></i>
+                        <span data-lang-key="uploadFile">上传文件</span>
+                    </button>
+                    <input type="file" name="file" id="file-input" class="hidden" multiple
+                           onchange="handleFileSelect(event)">
+                </div>
+
+                <!-- 文件夹上传 -->
+                <div class="relative group">
+                    <button type="button" onclick="document.getElementById('folder-input').click()"
+                            class="custom-btn custom-upload-btn">
+                        <i class="fas fa-folder-open"></i>
+                        <span data-lang-key="uploadFolder">上传文件夹</span>
+                    </button>
+                    <input type="file" name="file" id="folder-input" class="hidden" webkitdirectory directory
+                           onchange="handleFileSelect(event)">
+                </div>
+
+                <div class="relative group">
+                    <!-- 提交按钮 -->
+                    <button type="submit" class="custom-btn custom-submit-btn">
+                        <i class="fas fa-check-circle"></i>
+                        <span data-lang-key="submit">立即提交</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="alert-container">
+            {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="alert-toast bg-{{ 'green' if category == 'success' else 'red' }}-100 text-{{ 'green' if category == 'success' else 'red' }}-700 p-4 rounded-lg shadow-lg mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-triangle' }} mr-3"></i>
+                    <span>{{ message }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- 文件表格 -->
+        <table class="file-table w-full" id="file-table">
+            <thead>
+            <tr class="file-header">
+                <th class="w-[45%]" data-lang-key="name">Name</th>
+                <th class="w-[15%]" data-lang-key="size">Size</th>
+                <th class="w-[20%]" data-lang-key="uploadTime">Upload Time</th>
+                <th class="w-[20%]" data-lang-key="lastModified">Last Modified</th>
+            </tr>
+            </thead>
+            <tbody id="file-table-body">
+            {% for file in files %}
+            <tr class="file-item animate__animated animate__fadeIn" id="td"
+                style="animation-delay:{{ loop.index * 0.1 }}">
+                <td>
+                    <a href="/download/{{ file.name }}" class="file-name text-blue-400 hover:underline">
+                        <strong>{{ file.name.split('/')[-1].replace('_', ' ') }}</strong>
+                    </a>
+                </td>
+                <td class="file-size">
+                    {{ file.size }}
+                </td>
+                <td class="upload-time">
+                    {{ file.upload_time }}
+                </td>
+                <td class="modified-time">
+                    {{ file.modified_time }}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- 分页区域 -->
+        <div class="pagination flex justify-center mt-6" id="pagination">
+            {% if pagination.current > 1 %}
+            <a data-lang-key="previous" href="#" onclick="changePage(event, {{ pagination.current - 1 }})"
+               class="page-item">
+                Previous
+            </a>
+            {% endif %}
+
+            {% for p in pagination.range %}
+            {% if p == '...' %}
+            <span class="page-item ellipsis">⋯</span>
+            {% else %}
+            <a href="#" onclick="changePage(event, {{ p }})"
+               class="page-item {% if p == pagination.current %}active{% endif %}">
+                {{ p }}
+            </a>
+            {% endif %}
+            {% endfor %}
+
+            {% if pagination.current < pagination.total %}
+            <a data-lang-key="next" href="#" onclick="changePage(event, {{ pagination.current + 1 }})"
+               class="page-item">
+                Next
+            </a>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer class="footer-container bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-lg p-6 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 左侧栏 协议/隐私 -->
+            <div class="space-y-3">
+                <h3 class="font-semibold text-gray-800 dark:text-gray-200"
+                    data-lang-key="footer_agreement_privacy_title">协议 / 隐私</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-2">
+                    <i class="fab fa-creative-commons mr-2"></i>
+                    <a href="https://opensource.org/licenses/MIT" class="link-hover-effect" target="_blank">MIT
+                        License</a>
+                    &nbsp;|&nbsp;
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    <a href="/privacy" class="link-hover-effect" target="_blank" data-lang-key="footer_privacy_policy">隐私条款</a>
+                </p>
+            </div>
+
+            <!--中间栏 开发资源 -->
+            <div class="space-y-3">
+                <h3 class="font-semibold text-gray-800 dark:text-gray-200" data-lang-key="footer_developer_title">
+                    开发者</h3>
+                <div class="text-gray-600 dark:text-gray-400 mb-2">
+                    <a href="https://github.com/dcyyd/peak-cloud-share-master/blob/main/README.md"
+                       class="link-hover-effect" target="_blank">
+                        <i class="fas fa-code mr-2"></i>
+                        <span data-lang-key="footer_development_docs">开发文档</span>
+                    </a>
+                    &nbsp;|&nbsp;
+                    <a href="https://github.com/dcyyd/peak-cloud-share-master.git" class="link-hover-effect"
+                       target="_blank">
+                        <i class="fab fa-git-alt mr-2"></i>
+                        <span data-lang-key="footer_project_repo">项目仓库</span>
+                    </a>
+                </div>
+            </div>
+
+            <!--右侧栏 版权信息 -->
+            <div class="space-y-3">
+                <h3 class="font-semibold text-gray-800 dark:text-gray-200" data-lang-key="footer_copyright_title">
+                    版权信息</h3>
+                <div class="text-gray-600 dark:text-gray-400 mb-2">
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">
+                        &copy; <span id="current-year"></span>-<span id="next-current-year"></span>
+                        <a href="https://dcyyd.github.io" class="link-hover-effect" target="_blank">D.C.Y</a> | <span
+                            data-lang-key="footer_version">v2.0.0</span> |
+                        <span data-lang-key="footer_internal_system">Internal System</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/scripts.js"></script>
+</div>
+</body>
+
+</html>

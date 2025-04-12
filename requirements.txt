@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+
+# ========== 核心依赖 ==========
+# Web框架
+Flask
+Werkzeug
+
+# ========== 数据库相关 ==========
+Flask-SQLAlchemy
+PyMySQL
+DBUtils
+
+# ========== 用户认证 ==========
+Flask-Login
+bcrypt
+
+# ========== 表单处理 ==========
+Flask-WTF
+WTForms
+
+# ========== 配置管理 ==========
+python-dotenv
+config
+
+# ========== 数据处理与可视化 ==========
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+prettytable
+
+# ========== 打包部署 ==========
+PyInstaller
+
+# ========== 开发依赖 ==========
+# 测试
+pytest
+pytest-cov
+
+# 代码质量
+flake8
+black

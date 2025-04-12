@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>{{ code }} | Error</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body class="bg-gray-900 text-white relative min-h-screen overflow-hidden">
+
+<div class="container mx-auto px-4 relative z-10 flex items-center justify-center min-h-screen">
+    <div class="max-w-2xl text-center">
+        <div class="animate-fade-in-up">
+            <div class="text-9xl font-bold text-indigo-400 mb-s4 transition-all duration-500 hover:text-indigo-300">
+                {{ code }}
+            </div>
+            <h1 class="text-4xl font-semibold mb-6">{{ message }}</h1>
+            <p class="text-gray-300 text-lg mb-8">
+                {% if code == 404 %}
+                Sorry, the requested resource does not exist or has been removed.
+                {% elif code == 403 %}
+                Your current permission level does not allow access to this resource.
+                {% elif code == 500 %}
+                An internal server error has occurred.
+                {% endif %}
+            </p>
+            {% if code != 500 %}
+            <div class="space-x-4">
+                <a href="/"
+                   class="bg-indigo-500 hover:bg-indigo-600 px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Return to Home
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script src="assets/js/scripts.js"></script>
+</body>
+</html>
