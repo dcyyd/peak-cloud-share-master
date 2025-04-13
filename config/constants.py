@@ -40,11 +40,11 @@ FILE_RETENTION = 365 * 24 * 3600  # 用户文件默认保留周期为365天，�
 # ============================= 数据库配置 =============================
 # 配置数据库连接参数，支持环境变量动态调整。
 DB_CONFIG = {
-    'host': os.getenv('DB_HOST', 'localhost'),  # 数据库主机地址，默认为本地。
+    'host': os.getenv('DB_HOST', 'XXX'),  # 数据库主机地址，默认为本地。
     'port': int(os.getenv('DB_PORT', 3306)),  # 数据库端口号，默认为3306（MySQL标准端口）。
-    'user': os.getenv('DB_USER', 'root'),  # 数据库用户名，默认为root。
-    'password': os.getenv('DB_PASSWORD', 'sql503'),  # 数据库密码，建议通过环境变量配置以增强安全性。
-    'database': os.getenv('DB_NAME', 'file_sharing'),  # 数据库名称，默认为file_sharing。
+    'user': os.getenv('DB_USER', 'XXX'),  # 数据库用户名，默认为root。
+    'password': os.getenv('DB_PASSWORD', 'XXX'),  # 数据库密码，建议通过环境变量配置以增强安全性。
+    'database': os.getenv('DB_NAME', 'XXX'),  # 数据库名称，默认为file_sharing。
     'charset': 'utf8mb4',  # 数据库字符集，支持多语言字符。
     'autocommit': True,  # 是否自动提交事务，提升性能。
     'pool_size': 5,  # 数据库连接池大小，默认为5个连接。
@@ -54,10 +54,10 @@ DB_CONFIG = {
 # ============================= 邮件配置 =============================
 # 配置邮件服务参数，支持环境变量动态调整。
 EMAIL_CONFIG = {
-    'smtp_server': os.getenv('SMTP_SERVER', 'smtp.qq.com'),  # SMTP服务器地址，默认为腾讯企业邮箱。
-    'smtp_port': int(os.getenv('SMTP_PORT', 465)),  # SMTP服务器端口号，默认为465（SSL加密）。
-    'username': os.getenv('SMTP_USERNAME', 'fys_2024@foxmail.com'),  # 邮件用户名，默认为测试账号。
-    'password': os.getenv('SMTP_PASSWORD', 'clrvzknafxtycdaa'),  # 邮件密码，建议通过环境变量配置以增强安全性。
-    'sender': os.getenv('SMTP_SENDER', 'fys_2024@foxmail.com'),  # 发件人邮箱地址，默认为测试账号。
+    'smtp_server': os.getenv('SMTP_SERVER', 'XXX'),  # SMTP服务器地址，默认为腾讯企业邮箱。
+    'smtp_port': int(os.getenv('SMTP_PORT', XXX)),  # SMTP服务器端口号，默认为465（SSL加密）。
+    'username': os.getenv('SMTP_USERNAME', 'XXX'),  # 邮件用户名，默认为测试账号。
+    'password': os.getenv('SMTP_PASSWORD', 'XXX'),  # 邮件密码，建议通过环境变量配置以增强安全性。
+    'sender': os.getenv('SMTP_SENDER', 'XXX'),  # 发件人邮箱地址，默认为测试账号。
     'timeout': 10  # 邮件发送超时时间，默认为10秒。
 }
